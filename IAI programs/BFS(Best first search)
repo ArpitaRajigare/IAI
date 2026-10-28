@@ -1,0 +1,42 @@
+
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['G'],
+    'F': [],
+    'G': []
+}
+
+h = {
+    'A': 6,
+    'B': 4,
+    'C': 5,
+    'D': 3,
+    'E': 2,
+    'F': 4,
+    'G': 0
+}
+
+def best_first_search(graph, start, goal):
+    visited = []
+    queue = [start]
+
+    while queue:
+        queue.sort(key=lambda node: h[node])
+        node = queue.pop(0)
+
+        if node not in visited:
+            print(node, end=" ")
+            visited.append(node)
+
+            if node == goal:
+                return
+
+            for neighbour in graph[node]:
+                if neighbour not in visited:
+                    queue.append(neighbour)
+
+print("Best First Search:")
+best_first_search(graph, 'A', 'G')
